@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const {PORT} = require('./config/serverConfig');
 const apiRoutes = require('./routes/index');
 
+
 const app = express();
 
 const prepareAndStartServer = ()=>{

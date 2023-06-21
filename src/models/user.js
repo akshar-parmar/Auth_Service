@@ -1,7 +1,9 @@
+const bcrypt = require('bcrypt');
 'use strict';
 const {
   Model
 } = require('sequelize');
+const {SALT} = require('../config/serverConfig');
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -32,6 +34,13 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'User',
+  });
+
+  //trigger bolte
+  User.beforeCreate((user)=>{
+    //console.log(user);
+    const hashedPassword =  bcrypt.hashSync(user.password,SALT);
+    user.password = hashedPassword; 
   });
   return User;
 };

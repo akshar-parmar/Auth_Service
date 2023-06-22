@@ -10,8 +10,8 @@ class UserRepository {
             throw error;
         }
     }
-    async destroy(userId){
-        try {
+    async deleteUserById(userId){
+       try {
             await User.destroy({
                 where:{
                     id:userId
@@ -22,7 +22,7 @@ class UserRepository {
             console.log("Something went wrong on the repository layer");
             throw error;
         }
-    }
+    } 
 
     async getById(userId){
         try {

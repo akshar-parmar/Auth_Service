@@ -19,11 +19,10 @@ router.get(
     UserController.isAuthenticated
 );
 
-router.get('/dummy',(req,res)=>{
-    return res.status(200).json({message:'ok'});
-})
-
-
+router.delete(
+    '/users/:id',
+    UserController.deleteUser
+);
 
 
 module.exports = router;

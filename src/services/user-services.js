@@ -19,6 +19,16 @@ class UserService{
         }
     }
 
+    async deleteUserById(userId){
+        try {
+            const response = await this.userRepository.deleteUserById(userId);
+            return response;
+        } catch (error) {
+            console.log("something went wrong in the service layer");
+            throw error;
+        }
+    }
+
     async SignIn(email, plainPassword){
         try {
             //Step 1-> fetch the details of user using emailId
@@ -46,8 +56,8 @@ class UserService{
             if(!response){
                 throw {error: 'Invalid token'}
             }
-            const user = this.userRepository.getById(response.id);
-            //let say user deletes their account then their email id will not be present in db
+            const user = await this.userRepository.getById(response.id);
+            //let say user deletes their account then their email id, id will not be present in db
            if(!user){
                 throw {error: 'No user with the corresponding token exists'};
             }

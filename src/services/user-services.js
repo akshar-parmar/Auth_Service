@@ -40,6 +40,26 @@ class UserService{
         }
     }
 
+    async isAuthenticated(token){
+        try {
+            const response = this.verifyToken(token);
+            if(!response){
+                throw {error: 'Invalid token'}
+            }
+            const user = this.userRepository.getById(response.id);
+            //let say user deletes their account then their email id will not be present in db
+           if(!user){
+                throw {error: 'No user with the corresponding token exists'};
+            }
+            //if we got the user
+            return user.id;
+             
+        } catch (error) {
+            console.log("something went wrong in the auth process");
+            throw error;
+        }
+    }
+
 
     //it is going to take the user object as an argument
     createToken(user){
@@ -52,7 +72,7 @@ class UserService{
         }
     }
 
-    verifyToken(token){
+    verifyToken(token){  //it is expecting jwt token as parameter
         try {
             const response = jwt.verify(token,JWT_KEY);
             return response;

@@ -102,6 +102,15 @@ class UserService{
 
     }
 
+    isAdmin(userId){
+        try {
+            return this.userRepository.isAdmin(userId);
+        } catch (error) {
+            console.log("something went wrong in password comparison");
+            throw error;
+        }
+    }
+
      
 }
 

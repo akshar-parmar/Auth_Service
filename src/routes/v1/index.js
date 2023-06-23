@@ -24,5 +24,11 @@ router.delete(
     UserController.deleteUser
 );
 
+router.get(
+    '/isAdmin',
+    AuthRequestValidators.validateIsAdminRequest,
+    UserController.isAdmin
+);
+
 
 module.exports = router;

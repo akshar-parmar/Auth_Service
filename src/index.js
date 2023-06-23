@@ -21,13 +21,13 @@ const prepareAndStartServer = async()=>{
             db.sequelize.sync({alter: true});
         }
 
-        const u1 = await User.findByPk(1);
-        const r1 = await Role.findByPk(3);
+        // const u1 = await User.findByPk(1);
+        // const r1 = await Role.findByPk(3);
         // u1.addRole(r1);
        //const response = await u1.getRoles();  -->user u1 ke kitne roles hai
        //const response = await r1.getUsers();   //-->role r1 ke kitne users hai, for eg ADMIN role mein konse users hai
         //const response = await u1.hasRole(r1);
-       console.log(response);
+       //console.log(response);
 
     })
 }

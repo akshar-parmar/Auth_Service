@@ -57,7 +57,7 @@ class UserService{
                 throw {error: 'Invalid token'}
             }
             const user = await this.userRepository.getById(response.id);
-            //let say user deletes their account then their email id, id will not be present in db
+            //let say user deletes their account then their details will not be present in db
            if(!user){
                 throw {error: 'No user with the corresponding token exists'};
             }

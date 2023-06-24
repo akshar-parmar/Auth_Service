@@ -1,5 +1,6 @@
-const {StatusCodes} = require('http-status-codes')
+const {StatusCodes} = require('http-status-codes');
 
+//In javascript we have inbuilt Error class available
 class AppErrors extends Error{
     constructor(
         name ='AppError',

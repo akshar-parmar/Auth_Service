@@ -1,5 +1,8 @@
 const {User,Role} = require('../models/index');
 const ValidationError = require('../utils/validation-error');
+const ClientError = require('../utils/client-error');
+const {StatusCodes} = require('http-status-codes');
+
 class UserRepository {
     async create(data){
         try {
@@ -47,9 +50,19 @@ class UserRepository {
                     email:emailId
                 }
             });
+            //if user with this email doesnt exist then throw the ClientError
+            if(user==null){
+                throw new ClientError(
+                    'AttributeNotFound',  //nameproperty
+                    'Invalid email sent in the request',  //message
+                    'Please check the email, as there is no record of the email',  //explanation
+                    StatusCodes.NOT_FOUND  //statusCode
+                );
+            }
             return user;
             
         } catch (error) {
+            //console.log(error);
             console.log("Something went wrong on the repository layer");
             throw error;
         }
@@ -63,14 +76,12 @@ class UserRepository {
                     name:'ADMIN'
                 }
             });
-            
+            //below is the magic method
             return user.hasRole(adminRole);
         } catch (error) {
             console.log("Something went wrong on the repository layer");
             throw error;
         }
-
-
     }
 
 }
